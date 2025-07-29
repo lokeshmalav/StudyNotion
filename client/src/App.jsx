@@ -98,41 +98,42 @@ function App() {
             </OpenRoute>
           }
         />
-        {/* Private Route - for Only Logged in User */}
-        <Route
-          element={
-            <PrivateRoute>
-              <Dashboard />
-            </PrivateRoute>
-          }
-        >
-          {/* Route for all users */}
-          <Route path="dashboard/my-profile" element={<MyProfile />} />
-          <Route path="dashboard/Settings" element={<Settings />} />
-          {/* Route only for Instructors */}
-          {user?.accountType === ACCOUNT_TYPE.INSTRUCTOR && (
-            <>
-              <Route path="dashboard/instructor" element={<Instructor />} />
-              <Route path="dashboard/my-courses" element={<MyCourses />} />
-              <Route path="dashboard/add-course" element={<AddCourse />} />
-              <Route
-                path="dashboard/edit-course/:courseId"
-                element={<EditCourse />}
-              />
-            </>
-          )}
-          {/* Route only for Students */}
-          {user?.accountType === ACCOUNT_TYPE.STUDENT && (
-            <>
-              <Route
-                path="dashboard/enrolled-courses"
-                element={<EnrolledCourses />}
-              />
-              <Route path="/dashboard/cart" element={<Cart />} />
-            </>
-          )}
-          <Route path="dashboard/settings" element={<Settings />} />
-        </Route>
+        {/* Private Route1 - for Only Logged in User */}
+               <Route
+           path="dashboard"
+           element={
+             <PrivateRoute>
+               <Dashboard />
+             </PrivateRoute>
+           }
+         >
+           {/* Default route when user just visits /dashboard */}
+           <Route index element={<Navigate to="my-profile" />} />
+         
+           {/* Route for all users */}
+           <Route path="my-profile" element={<MyProfile />} />
+           <Route path="settings" element={<Settings />} />
+         
+           {/* Instructor only routes */}
+           {user?.accountType === ACCOUNT_TYPE.INSTRUCTOR && (
+             <>
+               <Route path="instructor" element={<Instructor />} />
+               <Route path="my-courses" element={<MyCourses />} />
+               <Route path="add-course" element={<AddCourse />} />
+               <Route path="edit-course/:courseId" element={<EditCourse />} />
+             </>
+           )}
+         
+           {/* Student only routes */}
+           {user?.accountType === ACCOUNT_TYPE.STUDENT && (
+             <>
+               <Route path="enrolled-courses" element={<EnrolledCourses />} />
+               <Route path="cart" element={<Cart />} />
+             </>
+           )}
+         </Route>
+
+        
 
         {/* For the watching course lectures */}
         <Route
