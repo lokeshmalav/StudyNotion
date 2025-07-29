@@ -110,7 +110,8 @@ function App() {
            }
          >
            {/* Default route when user just visits /dashboard */}
-           <Route index element={<Navigate to="my-profile" />} />
+          <Route index element={<MyProfile />} />
+
          
            {/* Route for all users */}
            <Route path="my-profile" element={<MyProfile />} />
