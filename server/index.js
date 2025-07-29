@@ -25,12 +25,15 @@ database.connect();
 // Middlewares
 app.use(express.json());
 app.use(cookieParser());
+const cors = require("cors");
+
 app.use(
   cors({
-    origin: "https://studynotion-frontend-bfln.onrender.com",
+    origin: "https://studynotion-frontend-0otf.onrender.com",
     credentials: true,
   })
 );
+
 
 
 
